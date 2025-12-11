@@ -1,0 +1,7 @@
+PyQt6
+Jinja2
+weasyprint
+python-docx
+qrcode[pil]
+
+pip install -r requirements.txt

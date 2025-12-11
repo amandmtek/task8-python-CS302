@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Древний Свиток: {{ quest.title }}</title>
+    
+    <style>
+        /* Шрифт */
+        @font-face {
+            font-family: 'Uncial Antiqua';
+            src: url('../assets/fonts/Uncial_Antiqua.ttf') format('truetype'); 
+        }
+
+        /* ------------------------------------------- */
+        /* Стили для тела документа (Древний вид) */
+        /* ------------------------------------------- */
+        body {
+            font-family: 'Uncial Antiqua', serif;
+            color: #3e2723; /* Очень темный коричневый */
+            background-color: #eae0c8; /* Цвет старой, потрескавшейся бумаги */
+            margin: 0;
+            padding: 60px;
+        }
+
+        .runes-border {
+            border: 10px solid #5d4037; /* Толстая коричневая рамка */
+            border-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10"><rect width="10" height="10" fill="#795548"/><circle cx="5" cy="5" r="2" fill="#3e2723"/></svg>') 10 repeat; /* Имитация рунического/резного края */
+            padding: 40px;
+            background-color: #f7f3e8; /* Внутренний фон светлее */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5) inset;
+        }
+
+        h1 {
+            text-align: center;
+            color: #880e4f; /* Глубокий бордовый цвет */
+            font-size: 30pt;
+            letter-spacing: 2px;
+            text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.2);
+            margin-bottom: 30px;
+        }
+
+        h2 {
+            color: #3e2723;
+            font-size: 18pt;
+            border-bottom: 1px solid #a1887f;
+            padding-bottom: 5px;
+            margin-top: 30px;
+        }
+
+        .data-point {
+            font-size: 14pt;
+            line-height: 2;
+        }
+
+        .data-point strong {
+            color: #5d4037;
+            display: inline-block;
+            width: 250px;
+            text-align: right;
+            margin-right: 20px;
+        }
+
+        .description {
+            margin-top: 20px;
+            padding: 20px;
+            border: 2px dashed #795548;
+            line-height: 1.8;
+            min-height: 200px;
+            white-space: pre-wrap;
+        }
+
+        .qr-code {
+            float: left;
+            margin-right: 20px;
+            margin-bottom: 20px;
+            border: 3px solid #795548;
+            width: 100px;
+            height: 100px;
+        }
+
+        .seal {
+            clear: both;
+            margin-top: 40px;
+            text-align: center;
+            color: #880e4f;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="runes-border">
+        <img class="qr-code" src="data:image/png;base64,{{ qr_code }}" alt="QR Code">
+        
+        <h1>ПРОРОЧЕСТВО ИЗ РУИН</h1>
+        
+        <div class="data-point"><strong>Начертание:</strong> {{ quest.title }}</div>
+        <div class="data-point"><strong>Испытание:</strong> <span style="color: #c62828;">{{ quest.difficulty }}</span></div>
+        <div class="data-point"><strong>Плата:</strong> {{ quest.reward }} Самоцветов</div>
+        <div class="data-point"><strong>Завершить до:</strong> {{ quest.deadline | default('Век не указан') }}</div>
+        <div class="data-point"><strong>Обнаружено:</strong> {{ current_date }}</div>
+
+        <h2>📜 Текст Древнего Свитка</h2>
+        <div class="description">
+            {{ quest.description | default('Текст свитка частично утерян и неразборчив...') }}
+        </div>
+        
+        <div class="seal">
+            <p>Хранители Древних Знаний</p>
+        </div>
+    </div>
+</body>
+</html>
